@@ -8,7 +8,8 @@
 	},
 	"scripts": {
 		"compile": "rm -rf dist && tsc",
-		"watch": "tsc -w"
+		"watch": "tsc -w",
+		"run": "npm i && node ."
 	},
 	"author": "epsilon",
 	"license": "ISC"
