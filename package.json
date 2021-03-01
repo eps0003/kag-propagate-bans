@@ -1,0 +1,15 @@
+{
+	"name": "propagate-bans",
+	"version": "1.0.0",
+	"description": "Propogates bans to all connected servers",
+	"main": "dist/index.js",
+	"devDependencies": {
+		"@types/node": "^14.14.31"
+	},
+	"scripts": {
+		"compile": "rm -rf dist && tsc",
+		"watch": "tsc -w"
+	},
+	"author": "epsilon",
+	"license": "ISC"
+}
