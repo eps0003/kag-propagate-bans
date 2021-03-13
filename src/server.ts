@@ -106,6 +106,7 @@ export default class Server {
 	}
 
 	private propagateBan(ban: Ban) {
+		console.log(`Banning: ${ban.username} for ${ban.minutes}`)
 		for (const server of Server.servers) {
 			if (this === server) continue;
 
@@ -115,6 +116,7 @@ export default class Server {
 	}
 
 	private propagateUnban(unban: Unban) {
+		console.log(`Unbanning: ${unban.username}`)
 		for (const server of Server.servers) {
 			if (this === server) continue;
 
