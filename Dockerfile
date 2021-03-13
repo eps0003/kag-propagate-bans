@@ -5,7 +5,7 @@ WORKDIR /kag-propagate-bans
 
 RUN npm install -g typescript
 
-COPY . .s
+COPY . .
 RUN npm install
 RUN npm run-script compile
 

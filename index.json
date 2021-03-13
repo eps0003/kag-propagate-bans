@@ -1,0 +1,14 @@
+{
+  "servers": [
+    {
+      "address": "127.0.0.1",
+      "port": "50301",
+      "password": "a"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": "50302",
+      "password": "a"
+    }
+  ]
+}
