@@ -2,12 +2,12 @@
 
 This program propagates bans to all connected servers, preventing banned players from switching servers to continue being a shithead. The plan for this is for it to eventually be used on all official KAG servers. However, feel free to use this on your own servers if you need to shit on the shitheads.
 
-# Prerequisites
+## Prerequisites
 
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-# Setup
+## Setup
 
 1. Add servers to `src/index.ts`
 2. Optionally adjust the reconnect interval at the top of `src/server.ts`
@@ -32,3 +32,8 @@ This program propagates bans to all connected servers, preventing banned players
    - `sv_tcpr = 1`
    - `sv_tcpr_timestamp = 0`
 6. Run the program using `npm run-script run`
+
+## Docker
+
+1. Build: `docker build . -tkag-propagate-bans`
+2. Run: `docker run -d --rm kag-propagate-bans`
