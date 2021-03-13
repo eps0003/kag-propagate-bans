@@ -15,6 +15,8 @@ This program propagates bans to all connected servers, preventing banned players
 4. Create an AngelScript file with the following code and add it to the `gamemode.cfg` of every gamemode your servers host:
 
    ```angelscript
+   #define SERVER_ONLY
+   
    void onBan(const string username, const int minutes, const string reason)
    {
        tcpr("BAN " + username + " " + minutes + " " + reason);
