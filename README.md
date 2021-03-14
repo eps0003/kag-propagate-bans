@@ -9,14 +9,14 @@ This program propagates bans to all connected servers, preventing banned players
 
 ## Setup
 
-1. Edit index.json to add servers
+1. Add servers to `config.json`
 2. Optionally adjust the reconnect interval at the top of `src/server.ts`
 3. Compile the program using `npm run-script compile`
 4. Create an AngelScript file with the following code and add it to the `gamemode.cfg` of every gamemode your servers host:
 
    ```angelscript
    #define SERVER_ONLY
-   
+
    void onBan(const string username, const int minutes, const string reason)
    {
        tcpr("BAN " + username + " " + minutes + " " + reason);
@@ -36,4 +36,4 @@ This program propagates bans to all connected servers, preventing banned players
 ## Docker
 
 1. Build: `docker build . -tkag-propagate-bans`
-2. Run: `docker run -d --rm -v index.json:/kag-propagate-bans/index.json kag-propagate-bans`
+2. Run: `docker run -d --rm -v config.json:/kag-propagate-bans/config.json kag-propagate-bans`
