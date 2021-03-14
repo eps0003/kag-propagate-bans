@@ -9,10 +9,9 @@ This program propagates bans to all connected servers, preventing banned players
 
 ## Setup
 
-1. Add servers to `config.json`
-2. Optionally adjust the reconnect interval at the top of `src/server.ts`
-3. Compile the program using `npm run-script compile`
-4. Create an AngelScript file with the following code and add it to the `gamemode.cfg` of every gamemode your servers host:
+1. Add servers and adjust the reconnect interval in `config.json`
+2. Compile the program using `npm run-script compile`
+3. In a new mod, create an AngelScript file with the following code and add it to the `gamemode.cfg` of every gamemode your servers host (assuming the gamemode doesn't already have `PropagateBans.as`):
 
    ```angelscript
    #define SERVER_ONLY
@@ -28,10 +27,10 @@ This program propagates bans to all connected servers, preventing banned players
    }
    ```
 
-5. Ensure the following settings are applied to `autoconfig.cfg`:
+4. Ensure the following settings are applied to `autoconfig.cfg`:
    - `sv_tcpr = 1`
    - `sv_tcpr_timestamp = 0`
-6. Run the program using `npm run-script run`
+5. Run the program using `npm run-script run`
 
 ## Docker
 

@@ -1,11 +1,11 @@
 import { Socket } from "net";
 
-const reconnectTime = 30000;
-
 export default class Server {
 	address: string;
 	port: number;
 	rconPassword: string;
+	reconnectTime: number;
+
 	socket = new Socket();
 
 	bans: string[] = [];
@@ -13,10 +13,11 @@ export default class Server {
 
 	static servers: Server[] = [];
 
-	constructor(address: string, port: number, rconPassword: string) {
+	constructor(address: string, port: number, rconPassword: string, reconnectTime = 30) {
 		this.address = address;
 		this.port = port;
 		this.rconPassword = rconPassword;
+		this.reconnectTime = reconnectTime * 1000;
 
 		this.init();
 
@@ -31,17 +32,17 @@ export default class Server {
 
 		this.socket.on("end", () => {
 			console.log(`Connection ended with ${this.address}:${this.port}. Attempting to reconnect.`);
-			this.scheduleReconnect(reconnectTime);
+			this.scheduleReconnect();
 		});
 
 		this.socket.on("timeout", () => {
 			console.log(`Connection timed out with ${this.address}:${this.port}. Attempting to reconnect.`);
-			this.scheduleReconnect(reconnectTime);
+			this.scheduleReconnect();
 		});
 
 		this.socket.on("error", (err) => {
 			console.log(`${err}. Attempting to reconnect.`);
-			this.scheduleReconnect(reconnectTime);
+			this.scheduleReconnect();
 		});
 
 		this.socket.on("data", (buffer: Buffer) => {
@@ -77,8 +78,8 @@ export default class Server {
 		});
 	}
 
-	private scheduleReconnect(time: number) {
-		setTimeout(this.init.bind(this), time);
+	private scheduleReconnect() {
+		setTimeout(this.init.bind(this), this.reconnectTime);
 	}
 
 	private parseBan(data: string): Ban | null {
@@ -106,7 +107,7 @@ export default class Server {
 	}
 
 	private propagateBan(ban: Ban) {
-		console.log(`Banning: ${ban.username} for ${ban.minutes}`)
+		console.log(`Banning: ${ban.username} for ${ban.minutes}`);
 		for (const server of Server.servers) {
 			if (this === server) continue;
 
@@ -116,7 +117,7 @@ export default class Server {
 	}
 
 	private propagateUnban(unban: Unban) {
-		console.log(`Unbanning: ${unban.username}`)
+		console.log(`Unbanning: ${unban.username}`);
 		for (const server of Server.servers) {
 			if (this === server) continue;
 

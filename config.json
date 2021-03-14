@@ -1,4 +1,5 @@
 {
+	"reconnectTime": 30,
 	"servers": [
 		{
 			"address": "127.0.0.1",
