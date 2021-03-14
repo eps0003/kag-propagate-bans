@@ -1,4 +1,13 @@
+import fs from "fs";
 import Server from "./server";
 
-new Server("127.0.0.1", 50301, "a");
-new Server("127.0.0.1", 50302, "a");
+try {
+	const data = fs.readFileSync("config.json", "utf8");
+	const serverList = JSON.parse(data);
+	for (const server of serverList.servers) {
+		new Server(server.address, server.port, server.password);
+	}
+} catch (err) {
+	console.log("Error reading config.json");
+	console.error(err);
+}
